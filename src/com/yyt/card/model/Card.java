@@ -5,14 +5,9 @@ package com.yyt.card.model;
  */
 public class Card {
 
-    private Suit suit;
+    private final Suit suit;
 
-    private Point point;
-
-    public Card(String suit, String point) {
-        this.suit = Suit.valueOf(suit);
-        this.point = Point.valueOf(point);
-    }
+    private final Point point;
 
     public Card(Suit suit,Point point) {
         this.point = point;
@@ -92,17 +87,11 @@ public class Card {
         return suit.getVal();
     }
 
-    public void setSuit(String suit) {
-        this.suit = Suit.valueOf(suit);
-    }
-
     public String getPoint() {
         return point.val;
     }
 
-    public void setPoint(String point) {
-        this.point = Point.valueOf(point);
-    }
+
 
     @Override
     public String toString() {
