@@ -1,12 +1,13 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+package com.yyt.card.model;
 
+/**
+ * @author yyt
+ */
 public class Card {
     private String suit;
     private String point;
 
-    public Card(String suit,String point) {
+    public Card(String suit, String point) {
         this.suit = suit;
         this.point = point;
     }
@@ -15,12 +16,12 @@ public class Card {
         return suit;
     }
 
-    public String getPoint() {
-        return point;
-    }
-
     public void setSuit(String suit) {
         this.suit = suit;
+    }
+
+    public String getPoint() {
+        return point;
     }
 
     public void setPoint(String point) {
@@ -29,7 +30,7 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
+        return "com.yyt.card.model.Card{" +
                 "suit='" + suit + '\'' +
                 ", point=" + point +
                 '}';

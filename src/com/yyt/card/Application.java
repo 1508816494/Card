@@ -1,13 +1,29 @@
+package com.yyt.card;
+
+import com.yyt.card.model.Card;
+import com.yyt.card.model.Player;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * author yyt
+ */
+public class Application {
 
-public class Test {
+    public static void main(String[] args) {
+        Application start = new Application();
+        start.competiton();
+        // System.exit(0);
+
+
+    }
 
     /**
      * 创建一副牌
+     *
      * @return
      */
     public Card[] initCard() {
@@ -31,16 +47,17 @@ public class Test {
 
     /**
      * 创建玩家
+     *
      * @return
      */
     public Player initPlayer(int index) {
-        System.out.println("请输入第"+index+"位玩家的姓名：" );
+        System.out.println("请输入第" + index + "位玩家的姓名：");
         Scanner input = new Scanner(System.in);
         String name1 = input.next();
-        return new Player(index,name1);
+        return new Player(index, name1);
     }
 
-    public void competiton(){
+    public void competiton() {
         //创建牌
         Card[] initcards = initCard();
 
@@ -61,17 +78,14 @@ public class Test {
 
         //发牌
         System.out.println("洗牌完成！下面开始发牌。。。");
-        player1.setCardsv2(allCards.subList(0,26));
-        player2.setCardsv2(allCards.subList(26,52));//此处为了方便，直接给出索引值，也可用size()
+        player1.setCardsv2(allCards.subList(0, 26));
+        player2.setCardsv2(allCards.subList(26, 52));//此处为了方便，直接给出索引值，也可用size()
 
         //出牌
         System.out.println("发牌完成！游戏开始，请玩家1先出牌！");
 
         //比赛
-        tableGame(player1,player2,tableList);
-
-
-
+        tableGame(player1, player2, tableList);
 
 
     }
@@ -88,12 +102,12 @@ public class Test {
     }
 
     /**
-      比赛规则，每次出牌后比较当前桌面上是否有相同点数的牌
-      若有相同，奖励给玩家，并且重新打印出桌面上奖励之后的余牌
-      若桌面上最后一张牌为J，则此次出牌的玩家获得桌面上所有的牌
+     * 比赛规则，每次出牌后比较当前桌面上是否有相同点数的牌
+     * 若有相同，奖励给玩家，并且重新打印出桌面上奖励之后的余牌
+     * 若桌面上最后一张牌为J，则此次出牌的玩家获得桌面上所有的牌
      */
-    public void compRule(Player player,List<Card> tableList ) {
-        if(tableList.get(tableList.size()-1).getPoint().equals("J")) {
+    public void compRule(Player player, List<Card> tableList) {
+        if (tableList.get(tableList.size() - 1).getPoint().equals("J")) {
             System.out.println("恭喜玩家" + player.getName() + "!您扔出了大钩子！桌面上的所有牌都将奖励给您！");
             player.getCards().addAll(tableList);
             tableList.clear();
@@ -117,17 +131,18 @@ public class Test {
     /**
      * 出牌方法
      */
-    public  void giveOutCards(Player player, List<Card> tableList) {
+    public void giveOutCards(Player player, List<Card> tableList) {
         Card outCard = player.getCardQueue().poll();  //poll 方法会自动移除
         tableList.add(outCard);
         System.out.println("玩家" + player.getName() + "出牌:" + outCard.getSuit() + outCard.getPoint());
 
     }
+
     /**
      * 打印纸牌list中花色和点数
      */
     public void printListCards(List<Card> cards) {
-        for (int i = 0; i < cards.size();i++) {
+        for (int i = 0; i < cards.size(); i++) {
             System.out.println(cards.get(i).getSuit() + cards.get(i).getPoint());
         }
     }
@@ -136,22 +151,13 @@ public class Test {
      * 比赛现场
      */
 
-    public void tableGame(Player player1,Player player2,List<Card> tableList) {
+    public void tableGame(Player player1, Player player2, List<Card> tableList) {
         while (!player1.getCardQueue().isEmpty() && !player2.getCardQueue().isEmpty()) {                 //玩家1和玩家2的牌数都不为空
-            giveOutCards(player1,tableList);
-            compRule(player1,tableList);
-            giveOutCards(player2,tableList);
-            compRule(player2,tableList);
+            giveOutCards(player1, tableList);
+            compRule(player1, tableList);
+            giveOutCards(player2, tableList);
+            compRule(player2, tableList);
         }
         System.out.println("游戏结束！玩家" + player1.getName() + "是否获胜：" + !player1.getCards().isEmpty() + "玩家" + player2.getName() + "是否获胜：" + !player2.getCards().isEmpty());          //此处需要判断谁获胜
-    }
-
-    public static void main(String[] args) {
-        Test start = new Test();
-        start.competiton();
-       // System.exit(0);
-
-
-
     }
 }
