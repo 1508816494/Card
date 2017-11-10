@@ -26,8 +26,8 @@ public class Application {
      *
      * @return
      */
-    public Card[] initCard() {
-        Card[] initcards = {new Card("方片", "2"), new Card("方片", "3"), new Card("方片", "4"),
+   /* public Card[] initCard() {
+        Card[] initCards = {new Card("方片", "2"), new Card("方片", "3"), new Card("方片", "4"),
                 new Card("方片", "5"), new Card("方片", "6"), new Card("方片", "7"), new Card("方片", "8"),
                 new Card("方片", "9"), new Card("方片", "10"), new Card("方片", "J"), new Card("方片", "Q"),
                 new Card("方片", "K"), new Card("方片", "A"), new Card("梅花", "2"), new Card("梅花", "3"),
@@ -42,7 +42,21 @@ public class Application {
                 new Card("红桃", "10"), new Card("红桃", "J"), new Card("红桃", "Q"), new Card("红桃", "K"),
                 new Card("红桃", "A")};
 
-        return initcards;
+        return initCards;
+    }*/
+
+    /**
+     * 遍历牌的花色和点数来创建牌
+     * @return
+     */
+    public List<Card> initCardV2() {
+        List<Card> cards = new ArrayList<>(52);
+        for (Card.Suit suit : Card.Suit.values()) {
+            for (Card.Point point : Card.Point.values()) {
+                cards.add(new Card(suit,point));
+            }
+        }
+        return cards;
     }
 
     /**
@@ -59,7 +73,9 @@ public class Application {
 
     public void competiton() {
         //创建牌
-        Card[] initcards = initCard();
+        //Card[] initcards = initCard();
+
+        List<Card> cards = initCardV2();
 
         System.out.println("酱酱酱酱~~~~~~欢迎来到婷婷钓鱼游戏！");
         System.out.println("请创建双方玩家！");
@@ -73,7 +89,7 @@ public class Application {
 
         //洗牌
         System.out.println("游戏开始，下面开始洗牌。。。");
-        ArrayList<Card> allCards = washCard(initcards);
+        List<Card> allCards = washCard(cards);
         ArrayList<Card> tableList = new ArrayList<>();
 
         //发牌
@@ -93,12 +109,12 @@ public class Application {
     /**
      * 洗牌方法
      */
-    public ArrayList<Card> washCard(Card[] array) {
-        ArrayList<Card> interList = new ArrayList<Card>(array.length);     //实现一个可以转换任意数组的方法.将数组转为list
-        Collections.addAll(interList, array);
+    public List<Card> washCard(List<Card> interList) {
+        //实现一个可以转换任意数组的方法.将数组转为list
+       /* ArrayList<Card> interList = new ArrayList<>();
+        Collections.addAll(interList, array);*/
         Collections.shuffle(interList);
         return interList;
-
     }
 
     /**
