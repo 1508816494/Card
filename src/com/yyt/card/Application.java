@@ -3,10 +3,7 @@ package com.yyt.card;
 import com.yyt.card.model.Card;
 import com.yyt.card.model.Player;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * author yyt
@@ -127,8 +124,9 @@ public class Application {
      */
     public void compRule(Player player, List<Card> tableList) {
         if (tableList.get(tableList.size() - 1).getPoint().equals("J")) {
-            System.out.println("恭喜玩家" + player.getName() + "!您扔出了大钩子！桌面上的所有牌都将奖励给您！");
-            player.getCards().addAll(tableList);
+            System.out.println("恭喜" + player.getName() + "!您扔出了大钩子！桌面上的所有牌都将奖励给您！");
+            player.getCardQueue().addAll(tableList);
+            //   player.getCards().addAll(tableList);
             tableList.clear();
             System.out.println("奖励完成！目前桌面上的牌为空！");
         } else {
@@ -136,9 +134,14 @@ public class Application {
                 String temp = tableList.get(i).getPoint();
                 for (int j = i + 1; j < tableList.size(); j++) {
                     if (temp.equals(tableList.get(j).getPoint())) {
-                        System.out.println("当前桌面上第" + (i + 1) + "张牌和第" + (j + 1) + "牌点数相同，都为" + tableList.get(i).getPoint() + "!两张牌之间的所有牌奖励给玩家" + player.getName());
-                        player.getCards().addAll(tableList.subList(i, j + 1));
+                        System.out.println("当前桌面上第" + (i + 1) + "张牌和第" + (j + 1) + "牌点数相同，都为" + tableList.get(i).getPoint() + "!两张牌之间的所有牌奖励给" + player.getName());
+                        player.getCardQueue().addAll(tableList.subList(i,j + 1));
+                        //  player.getCards().addAll(tableList.subList(i, j + 1));
                         tableList.removeAll(tableList.subList(i, j + 1));
+                        if (tableList.isEmpty()) {
+                            System.out.println("奖励完成！目前桌面上的牌为空！");
+                            return;
+                        }
                         System.out.println("奖励完成！目前桌面上的牌为:");
                         printListCards(tableList);
                     }
@@ -153,7 +156,7 @@ public class Application {
     public void giveOutCards(Player player, List<Card> tableList) {
         Card outCard = player.getCardQueue().poll();  //poll 方法会自动移除
         tableList.add(outCard);
-        System.out.println("玩家" + player.getName() + "出牌:" + outCard.getSuit() + outCard.getPoint());
+        System.out.println(player.getName() + "出牌:" + outCard.getSuit() + outCard.getPoint());
 
     }
 
@@ -177,6 +180,13 @@ public class Application {
             giveOutCards(player2, tableList);
             compRule(player2, tableList);
         }
-        System.out.println("游戏结束！玩家" + player1.getName() + "是否获胜：" + !player1.getCards().isEmpty() + "玩家" + player2.getName() + "是否获胜：" + !player2.getCards().isEmpty());          //此处需要判断谁获胜
+        if(player1.getCardQueue().isEmpty()) {
+            System.out.println(player1.getName()+ "已经没牌啦！游戏结束！恭喜" + player2.getName() + "获胜！老铁就是强哦···");
+        }
+        if(player2.getCardQueue().isEmpty()) {
+            System.out.println(player2.getName() + "已经没牌啦！游戏结束！恭喜" + player1.getName() + "获胜！老铁就是强哦···");
+        }
+
+        //System.out.println("游戏结束！" + player1.getName() + "是否获胜：" + !player1.getCards().isEmpty() + "\t" + player2.getName() + "是否获胜：" + !player2.getCards().isEmpty());          //此处需要判断谁获胜
     }
 }
