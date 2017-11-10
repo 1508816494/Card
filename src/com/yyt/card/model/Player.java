@@ -17,7 +17,7 @@ public class Player {
     public Player(int id, String name) {
         this.id = id;
         this.name = name;
-        this.cards = new ArrayList<Card>();
+        this.cards = new ArrayList<>();
         this.cardQueue = new ConcurrentLinkedQueue<>();
     }
 
