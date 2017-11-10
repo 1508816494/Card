@@ -52,6 +52,9 @@ public class Application {
     public List<Card> initCardV2() {
         List<Card> cards = new ArrayList<>(52);
         for (Card.Suit suit : Card.Suit.values()) {
+            if (suit == Card.Suit.Null) {
+                continue;
+            }
             for (Card.Point point : Card.Point.values()) {
                 cards.add(new Card(suit,point));
             }
