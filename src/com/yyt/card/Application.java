@@ -124,6 +124,9 @@ public class Application {
      */
     public void compRule(Player player, List<Card> tableList) {
         if (tableList.get(tableList.size() - 1).getPoint().equals("J")) {
+            if(tableList.get(0).getPoint().equals("J") && player.getCardQueue().isEmpty()) {         //如果桌面上的牌为空，而其中以为玩家手中仅剩一张“J”，则大钩子钓不到任何牌，钩子失效，玩家输，否则则可能为死循环
+                return;
+            }
             System.out.println("恭喜" + player.getName() + "!您扔出了大钩子！桌面上的所有牌都将奖励给您！");
             player.getCardQueue().addAll(tableList);
             //   player.getCards().addAll(tableList);
