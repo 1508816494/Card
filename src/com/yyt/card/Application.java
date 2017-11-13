@@ -6,41 +6,16 @@ import com.yyt.card.model.Player;
 import java.util.*;
 
 /**
- * author yyt
+ * @author yyt
  */
 public class Application {
 
     public static void main(String[] args) {
         Application start = new Application();
         start.competiton();
-        // System.exit(0);
-
 
     }
 
-    /**
-     * 创建一副牌
-     *
-     * @return
-     */
-   /* public Card[] initCard() {
-        Card[] initCards = {new Card("方片", "2"), new Card("方片", "3"), new Card("方片", "4"),
-                new Card("方片", "5"), new Card("方片", "6"), new Card("方片", "7"), new Card("方片", "8"),
-                new Card("方片", "9"), new Card("方片", "10"), new Card("方片", "J"), new Card("方片", "Q"),
-                new Card("方片", "K"), new Card("方片", "A"), new Card("梅花", "2"), new Card("梅花", "3"),
-                new Card("梅花", "4"), new Card("梅花", "5"), new Card("梅花", "6"), new Card("梅花", "7"),
-                new Card("梅花", "8"), new Card("梅花", "9"), new Card("梅花", "10"), new Card("梅花", "J"),
-                new Card("梅花", "Q"), new Card("梅花", "K"), new Card("梅花", "A"), new Card("黑桃", "2"),
-                new Card("黑桃", "3"), new Card("黑桃", "4"), new Card("黑桃", "5"), new Card("黑桃", "6"),
-                new Card("黑桃", "7"), new Card("黑桃", "8"), new Card("黑桃", "9"), new Card("黑桃", "10"),
-                new Card("黑桃", "J"), new Card("黑桃", "Q"), new Card("黑桃", "K"), new Card("黑桃", "A"),
-                new Card("红桃", "2"), new Card("红桃", "3"), new Card("红桃", "4"), new Card("红桃", "5"),
-                new Card("红桃", "6"), new Card("红桃", "7"), new Card("红桃", "8"), new Card("红桃", "9"),
-                new Card("红桃", "10"), new Card("红桃", "J"), new Card("红桃", "Q"), new Card("红桃", "K"),
-                new Card("红桃", "A")};
-
-        return initCards;
-    }*/
 
     /**
      * 遍历牌的花色和点数来创建牌
@@ -73,8 +48,6 @@ public class Application {
 
     public void competiton() {
         //创建牌
-        //Card[] initcards = initCard();
-
         List<Card> cards = initCardV2();
 
         System.out.println("酱酱酱酱~~~~~~欢迎来到婷婷钓鱼游戏！");
@@ -95,7 +68,8 @@ public class Application {
         //发牌
         System.out.println("洗牌完成！下面开始发牌。。。");
         player1.setCardsv2(allCards.subList(0, 26));
-        player2.setCardsv2(allCards.subList(26, 52));//此处为了方便，直接给出索引值，也可用size()
+        //此处为了方便，直接给出索引值，也可用size()
+        player2.setCardsv2(allCards.subList(26, 52));
 
         //出牌
         System.out.println("发牌完成！游戏开始，请玩家1先出牌！");
@@ -110,9 +84,6 @@ public class Application {
      * 洗牌方法
      */
     public List<Card> washCard(List<Card> interList) {
-        //实现一个可以转换任意数组的方法.将数组转为list
-       /* ArrayList<Card> interList = new ArrayList<>();
-        Collections.addAll(interList, array);*/
         Collections.shuffle(interList);
         return interList;
     }

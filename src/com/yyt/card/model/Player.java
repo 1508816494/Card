@@ -1,6 +1,5 @@
 package com.yyt.card.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -11,13 +10,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Player {
     private int id;
     private String name;
-    private List<Card> cards;
     private Queue<Card> cardQueue;
 
     public Player(int id, String name) {
         this.id = id;
         this.name = name;
-        this.cards = new ArrayList<>();
         this.cardQueue = new ConcurrentLinkedQueue<>();
     }
 
@@ -45,15 +42,6 @@ public class Player {
         this.name = name;
     }
 
-    public List<Card> getCards() {
-        return cards;
-    }
-
-
-    public void setCards(List<Card> cards) {
-        this.cards = cards;
-    }
-
     public void setCardsv2(List<Card> cards) {
         this.cardQueue.addAll(cards);
     }
@@ -63,7 +51,7 @@ public class Player {
         return "com.yyt.card.model.Player{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", cards=" + cards +
+                ", cards=" + cardQueue +
                 '}';
     }
 }
